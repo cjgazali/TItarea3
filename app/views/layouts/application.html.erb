@@ -10,6 +10,10 @@
   </head>
 
   <body>
+    <%= form_tag(search_path, method: "get") do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag 'Search' %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
