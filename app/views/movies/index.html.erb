@@ -12,7 +12,7 @@
   <% @movies.each do |movie| %>
     <tr>
       <td><%= movie["episode_id"] %></td>
-      <td><%= link_to movie["title"], root_path %></td>
+      <td><%= link_to movie["title"], movie_path(movie["episode_id"]) %></td>
       <td><%= DateTime.strptime(movie["release_date"], '%Y-%m-%d').year %></td>
       <td><%= movie["director"] %></td>
       <td><%= movie["producer"] %></td>
