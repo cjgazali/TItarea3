@@ -1,0 +1,21 @@
+<h1>Star Wars Films</h1>
+<p>From the amazing SWAPI</p>
+
+<table>
+  <tr>
+    <th>Episode</th>
+    <th>Title</th>
+    <th>Year</th>
+    <th>Director</th>
+    <th>Producers</th>
+  </tr>
+  <% @movies.each do |movie| %>
+    <tr>
+      <td><%= movie["episode_id"] %></td>
+      <td><%= link_to movie["title"], root_path %></td>
+      <td><%= DateTime.strptime(movie["release_date"], '%Y-%m-%d').year %></td>
+      <td><%= movie["director"] %></td>
+      <td><%= movie["producer"] %></td>
+    </tr>
+  <% end %>
+</table>
