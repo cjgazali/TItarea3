@@ -4,17 +4,17 @@
 <h3>Characters</h3>
 <% @movie["characters"].each do |c| %>
   <% response = RestClient.get(c) %>
-  <p><%= JSON.parse(response)["name"] %></p>
+  <p><%= link_to JSON.parse(response)["name"], character_path(c[/\d+/]) %></p>
 <% end %>
 
 <h3>Planets</h3>
 <% @movie["planets"].each do |p| %>
   <% response = RestClient.get(p) %>
-  <p><%= JSON.parse(response)["name"] %></p>
+  <p><%= link_to JSON.parse(response)["name"], planet_path(p[/\d+/]) %></p>
 <% end %>
 
 <h3>Starships</h3>
 <% @movie["starships"].each do |s| %>
   <% response = RestClient.get(s) %>
-  <p><%= JSON.parse(response)["name"] %></p>
+  <p><%= link_to JSON.parse(response)["name"], starship_path(s[/\d+/]) %></p>
 <% end %>

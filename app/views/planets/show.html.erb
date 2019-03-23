@@ -1,0 +1,37 @@
+<h1><%= @planet["name"] %></h1>
+<p>From the amazing SWAPI</p>
+
+<table>
+  <tr>
+    <th>Rotation period</th>
+    <th>Orbital period</th>
+    <th>Diameter</th>
+    <th>Climate</th>
+    <th>Gravity</th>
+    <th>Terrain</th>
+    <th>Surface water</th>
+    <th>Population</th>
+  </tr>
+  <tr>
+    <td><%= @planet["rotation_period"] %></td>
+    <td><%= @planet["orbital_period"] %></td>
+    <td><%= @planet["diameter"] %></td>
+    <td><%= @planet["climate"] %></td>
+    <td><%= @planet["gravity"] %></td>
+    <td><%= @planet["terrain"] %></td>
+    <td><%= @planet["surface_water"] %></td>
+    <td><%= @planet["population"] %></td>
+  </tr>
+</table>
+
+<h3>Residents</h3>
+<% @planet["residents"].each do |c| %>
+  <% response = RestClient.get(c) %>
+  <p><%= link_to JSON.parse(response)["name"], character_path(c[/\d+/]) %></p>
+<% end %>
+
+<h3>Films</h3>
+<% @planet["films"].each do |f| %>
+  <% response = RestClient.get(f) %>
+  <p><%= link_to JSON.parse(response)["title"], movie_path(f[/\d+/]) %></p>
+<% end %>

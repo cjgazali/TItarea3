@@ -5,9 +5,7 @@ class MoviesController < ApplicationController
   end
 
   def show
-    response = RestClient.get('https://swapi.co/api/films/')
-    movies = JSON.parse(response)["results"]
-    @movie = movies.detect {|m| m["episode_id"] == params[:id].to_i}
-
+    response = RestClient.get('https://swapi.co/api/films/' + params[:id] + '/')
+    @movie = JSON.parse(response)
   end
 end

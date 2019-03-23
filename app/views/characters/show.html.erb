@@ -1,0 +1,39 @@
+<h1><%= @character["name"] %></h1>
+<p>From the amazing SWAPI</p>
+
+<table>
+  <tr>
+    <th>Height</th>
+    <th>Mass</th>
+    <th>Hair color</th>
+    <th>Skin color</th>
+    <th>Eye color</th>
+    <th>Birth year</th>
+    <th>Gender</th>
+  </tr>
+  <tr>
+    <td><%= @character["height"] %></td>
+    <td><%= @character["mass"] %></td>
+    <td><%= @character["hair_color"] %></td>
+    <td><%= @character["skin_color"] %></td>
+    <td><%= @character["eye_color"] %></td>
+    <td><%= @character["birth_year"] %></td>
+    <td><%= @character["gender"] %></td>
+  </tr>
+</table>
+
+<h3>Homeworld</h3>
+<% response = RestClient.get(@character["homeworld"]) %>
+<p><%= link_to JSON.parse(response)["name"], planet_path(@character["homeworld"][/\d+/]) %></p>
+
+<h3>Films</h3>
+<% @character["films"].each do |f| %>
+  <% response = RestClient.get(f) %>
+  <p><%= link_to JSON.parse(response)["title"], movie_path(f[/\d+/]) %></p>
+<% end %>
+
+<h3>Starships</h3>
+<% @character["starships"].each do |s| %>
+  <% response = RestClient.get(s) %>
+  <p><%= link_to JSON.parse(response)["name"], starship_path(s[/\d+/]) %></p>
+<% end %>
