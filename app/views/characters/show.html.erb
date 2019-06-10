@@ -12,13 +12,13 @@
     <th>Gender</th>
   </tr>
   <tr>
-    <td><%= @character["height"] %></td>
-    <td><%= @character["mass"] %></td>
-    <td><%= @character["hairColor"] %></td>
-    <td><%= @character["skinColor"] %></td>
-    <td><%= @character["eyeColor"] %></td>
-    <td><%= @character["birthYear"] %></td>
-    <td><%= @character["gender"] %></td>
+    <td><%= @character["height"] || "-" %></td>
+    <td><%= @character["mass"] || "-" %></td>
+    <td><%= @character["hairColor"] || "-" %></td>
+    <td><%= @character["skinColor"] || "-" %></td>
+    <td><%= @character["eyeColor"] || "-" %></td>
+    <td><%= @character["birthYear"] || "-" %></td>
+    <td><%= @character["gender"] || "-" %></td>
   </tr>
 </table>
 

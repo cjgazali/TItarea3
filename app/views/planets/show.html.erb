@@ -13,14 +13,14 @@
     <th>Population</th>
   </tr>
   <tr>
-    <td><%= @planet["rotationPeriod"] %></td>
-    <td><%= @planet["orbitalPeriod"] %></td>
-    <td><%= @planet["diameter"] %></td>
-    <td><%= @planet["climates"].join(', ') %></td>
-    <td><%= @planet["gravity"] %></td>
-    <td><%= @planet["terrains"].join(', ') %></td>
-    <td><%= @planet["surfaceWater"] %></td>
-    <td><%= @planet["population"] %></td>
+    <td><%= @planet["rotationPeriod"] || "-" %></td>
+    <td><%= @planet["orbitalPeriod"] || "-" %></td>
+    <td><%= @planet["diameter"] || "-" %></td>
+    <td><%= @planet["climates"].join(', ') || "-" %></td>
+    <td><%= @planet["gravity"] || "-" %></td>
+    <td><%= @planet["terrains"].join(', ') || "-" %></td>
+    <td><%= @planet["surfaceWater"] || "-" %></td>
+    <td><%= @planet["population"] || "-" %></td>
   </tr>
 </table>
 
@@ -28,8 +28,14 @@
 <% @planet["residentConnection"]["residents"].each do |c| %>
   <p><%= link_to c["name"], character_path(c["id"]) %></p>
 <% end %>
+<% if @planet["residentConnection"]["residents"].length == 0 %>
+  <p>None.</p>
+<% end %>
 
 <h3>Films</h3>
 <% @planet["filmConnection"]["films"].each do |f| %>
   <p><%= link_to f["title"], movie_path(f["episodeID"]) %></p>
+<% end %>
+<% if @planet["filmConnection"]["films"].length == 0 %>
+  <p>None.</p>
 <% end %>
