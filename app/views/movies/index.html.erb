@@ -16,7 +16,7 @@
       <td><%= link_to movie["title"], movie_path(movie["episodeID"]) %></td>
       <td><%= DateTime.strptime(movie["releaseDate"], '%Y-%m-%d').year %></td>
       <td><%= movie["director"] %></td>
-      <td><%= "#{movie["producers"][0]}, #{movie["producers"][1]}" %></td>
+      <td><%= movie["producers"].join(', ') %></td>
     </tr>
   <% end %>
 </table>
