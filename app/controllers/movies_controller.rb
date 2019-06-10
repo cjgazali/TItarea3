@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
 
     body = {"query": "query{allFilms{edges{node{title,releaseDate,episodeID,director,producers,id}}}}"}
     response = query_request(body)
-    # def @movies
+    @movies = response["allFilms"]["edges"]
   end
 
   def show
