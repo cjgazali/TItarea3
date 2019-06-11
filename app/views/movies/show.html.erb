@@ -1,5 +1,7 @@
+<p>Film:</p>
 <h1><%= @movie["title"] %></h1>
-<p>From the amazing SWAPI</p>
+<p>Epidose: <%= @movie["episodeID"] %> || Release date: <%= @movie["releaseDate"] %> || Director: <%= @movie["director"] %> || Producers: <%= @movie["producers"].join(', ') %></p>
+<p>Opening crawl: <%= @movie["openingCrawl"] %></p>
 
 <h3>Characters</h3>
 <% @movie["characterConnection"]["characters"].each do |c| %>
