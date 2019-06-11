@@ -29,8 +29,14 @@
 <% @character["filmConnection"]["films"].each do |f| %>
   <p><%= link_to f["title"], movie_path(f["episodeID"]) %></p>
 <% end %>
+<% if @character["filmConnection"]["films"].length == 0 %>
+  <p>None.</p>
+<% end %>
 
 <h3>Starships</h3>
 <% @character["starshipConnection"]["starships"].each do |s| %>
   <p><%= link_to s["name"], starship_path(s["id"]) %></p>
+<% end %>
+<% if @character["starshipConnection"]["starships"].length == 0 %>
+  <p>None.</p>
 <% end %>
