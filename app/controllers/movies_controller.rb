@@ -6,9 +6,6 @@ class MoviesController < ApplicationController
   end
 
   def show
-    response = RestClient.get('https://swapi.co/api/films/' + params[:id] + '/')
-    @movie = JSON.parse(response)
-
     id = params[:id].to_i
     if [1, 2, 3].include? id
       id += 3
