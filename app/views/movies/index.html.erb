@@ -10,12 +10,13 @@
     <th>Producers</th>
   </tr>
   <% @movies.each do |movie| %>
+    <% movie = movie["node"] %>
     <tr>
-      <td><%= movie["episode_id"] %></td>
-      <td><%= link_to movie["title"], movie_path(movie["url"][/\d+/]) %></td>
-      <td><%= DateTime.strptime(movie["release_date"], '%Y-%m-%d').year %></td>
+      <td><%= movie["episodeID"] %></td>
+      <td><%= link_to movie["title"], movie_path(movie["episodeID"]) %></td>
+      <td><%= DateTime.strptime(movie["releaseDate"], '%Y-%m-%d').year %></td>
       <td><%= movie["director"] %></td>
-      <td><%= movie["producer"] %></td>
+      <td><%= movie["producers"].join(', ') %></td>
     </tr>
   <% end %>
 </table>

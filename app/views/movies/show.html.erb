@@ -1,20 +1,19 @@
+<p>Film:</p>
 <h1><%= @movie["title"] %></h1>
-<p>From the amazing SWAPI</p>
+<p>Epidose: <%= @movie["episodeID"] %> || Release date: <%= @movie["releaseDate"] %> || Director: <%= @movie["director"] %> || Producers: <%= @movie["producers"].join(', ') %></p>
+<p>Opening crawl: <%= @movie["openingCrawl"] %></p>
 
 <h3>Characters</h3>
-<% @movie["characters"].each do |c| %>
-  <% response = RestClient.get(c) %>
-  <p><%= link_to JSON.parse(response)["name"], character_path(c[/\d+/]) %></p>
+<% @movie["characterConnection"]["characters"].each do |c| %>
+  <p><%= link_to c["name"], character_path(c["id"]) %></p>
 <% end %>
 
 <h3>Planets</h3>
-<% @movie["planets"].each do |p| %>
-  <% response = RestClient.get(p) %>
-  <p><%= link_to JSON.parse(response)["name"], planet_path(p[/\d+/]) %></p>
+<% @movie["planetConnection"]["planets"].each do |p| %>
+  <p><%= link_to p["name"], planet_path(p["id"]) %></p>
 <% end %>
 
 <h3>Starships</h3>
-<% @movie["starships"].each do |s| %>
-  <% response = RestClient.get(s) %>
-  <p><%= link_to JSON.parse(response)["name"], starship_path(s[/\d+/]) %></p>
+<% @movie["starshipConnection"]["starships"].each do |s| %>
+  <p><%= link_to s["name"], starship_path(s["id"]) %></p>
 <% end %>

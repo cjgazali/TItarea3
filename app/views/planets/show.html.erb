@@ -1,37 +1,41 @@
+<p>Planet:</p>
 <h1><%= @planet["name"] %></h1>
-<p>From the amazing SWAPI</p>
 
-<table>
+<table border="1">
   <tr>
     <th>Rotation period</th>
     <th>Orbital period</th>
     <th>Diameter</th>
-    <th>Climate</th>
+    <th>Climates</th>
     <th>Gravity</th>
-    <th>Terrain</th>
+    <th>Terrains</th>
     <th>Surface water</th>
     <th>Population</th>
   </tr>
   <tr>
-    <td><%= @planet["rotation_period"] %></td>
-    <td><%= @planet["orbital_period"] %></td>
-    <td><%= @planet["diameter"] %></td>
-    <td><%= @planet["climate"] %></td>
-    <td><%= @planet["gravity"] %></td>
-    <td><%= @planet["terrain"] %></td>
-    <td><%= @planet["surface_water"] %></td>
-    <td><%= @planet["population"] %></td>
+    <td><%= @planet["rotationPeriod"] || "-" %></td>
+    <td><%= @planet["orbitalPeriod"] || "-" %></td>
+    <td><%= @planet["diameter"] || "-" %></td>
+    <td><%= @planet["climates"].join(', ') || "-" %></td>
+    <td><%= @planet["gravity"] || "-" %></td>
+    <td><%= @planet["terrains"].join(', ') || "-" %></td>
+    <td><%= @planet["surfaceWater"] || "-" %></td>
+    <td><%= @planet["population"] || "-" %></td>
   </tr>
 </table>
 
 <h3>Residents</h3>
-<% @planet["residents"].each do |c| %>
-  <% response = RestClient.get(c) %>
-  <p><%= link_to JSON.parse(response)["name"], character_path(c[/\d+/]) %></p>
+<% @planet["residentConnection"]["residents"].each do |c| %>
+  <p><%= link_to c["name"], character_path(c["id"]) %></p>
+<% end %>
+<% if @planet["residentConnection"]["residents"].length == 0 %>
+  <p>None.</p>
 <% end %>
 
 <h3>Films</h3>
-<% @planet["films"].each do |f| %>
-  <% response = RestClient.get(f) %>
-  <p><%= link_to JSON.parse(response)["title"], movie_path(f[/\d+/]) %></p>
+<% @planet["filmConnection"]["films"].each do |f| %>
+  <p><%= link_to f["title"], movie_path(f["episodeID"]) %></p>
+<% end %>
+<% if @planet["filmConnection"]["films"].length == 0 %>
+  <p>None.</p>
 <% end %>

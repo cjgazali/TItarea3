@@ -11,11 +11,6 @@
 
   <body>
     <%= link_to "Home", root_path %>
-    <br><br>
-    <%= form_tag(search_path, method: "get") do %>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag 'Search' %>
-    <% end %>
     <%= yield %>
   </body>
 </html>

@@ -1,7 +1,7 @@
+<p>Character:</p>
 <h1><%= @character["name"] %></h1>
-<p>From the amazing SWAPI</p>
 
-<table>
+<table border="1">
   <tr>
     <th>Height</th>
     <th>Mass</th>
@@ -12,28 +12,31 @@
     <th>Gender</th>
   </tr>
   <tr>
-    <td><%= @character["height"] %></td>
-    <td><%= @character["mass"] %></td>
-    <td><%= @character["hair_color"] %></td>
-    <td><%= @character["skin_color"] %></td>
-    <td><%= @character["eye_color"] %></td>
-    <td><%= @character["birth_year"] %></td>
-    <td><%= @character["gender"] %></td>
+    <td><%= @character["height"] || "-" %></td>
+    <td><%= @character["mass"] || "-" %></td>
+    <td><%= @character["hairColor"] || "-" %></td>
+    <td><%= @character["skinColor"] || "-" %></td>
+    <td><%= @character["eyeColor"] || "-" %></td>
+    <td><%= @character["birthYear"] || "-" %></td>
+    <td><%= @character["gender"] || "-" %></td>
   </tr>
 </table>
 
 <h3>Homeworld</h3>
-<% response = RestClient.get(@character["homeworld"]) %>
-<p><%= link_to JSON.parse(response)["name"], planet_path(@character["homeworld"][/\d+/]) %></p>
+<p><%= link_to @character["homeworld"]["name"], planet_path(@character["homeworld"]["id"]) %></p>
 
 <h3>Films</h3>
-<% @character["films"].each do |f| %>
-  <% response = RestClient.get(f) %>
-  <p><%= link_to JSON.parse(response)["title"], movie_path(f[/\d+/]) %></p>
+<% @character["filmConnection"]["films"].each do |f| %>
+  <p><%= link_to f["title"], movie_path(f["episodeID"]) %></p>
+<% end %>
+<% if @character["filmConnection"]["films"].length == 0 %>
+  <p>None.</p>
 <% end %>
 
 <h3>Starships</h3>
-<% @character["starships"].each do |s| %>
-  <% response = RestClient.get(s) %>
-  <p><%= link_to JSON.parse(response)["name"], starship_path(s[/\d+/]) %></p>
+<% @character["starshipConnection"]["starships"].each do |s| %>
+  <p><%= link_to s["name"], starship_path(s["id"]) %></p>
+<% end %>
+<% if @character["starshipConnection"]["starships"].length == 0 %>
+  <p>None.</p>
 <% end %>
